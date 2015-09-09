@@ -1,0 +1,52 @@
+package puzzle_Stones;
+
+import javax.imageio.ImageIO;
+import javax.inject.Named;
+
+import java.awt.image.BufferedImage;  
+import java.io.*;  
+import java.awt.*;  
+  
+@Named
+public class ImageSplit {  
+
+	public static void Chunk(int rows,int cols,String imageName) throws IOException {
+//	public static void main(String [ ] args) throws IOException{
+        File file = new File("src/main/webapp/resources/images/gameStone.jpg"); // z kadial obrazok 
+        FileInputStream fis = new FileInputStream(file);  
+        BufferedImage image = ImageIO.read(fis); //nacitanie image adresara
+        
+//        System.out.println(imageName); // vypis iba ZBYTOCNE
+        
+//        int rows = 2;
+//        int cols = 2;
+        int chunks = rows * cols;  
+        BufferedImage imgs[] = new BufferedImage[chunks]; //Image array to hold image chunks 
+        int chunkWidth = image.getWidth() / cols; // determines the chunk width and height  
+        int chunkHeight = image.getHeight() / rows;  
+        int count = 0;  
+        
+        for (int x = 0; x < rows; x++) {  
+            for (int y = 0; y < cols; y++) {  
+                //Initialize the image array with image chunks  
+                imgs[count] = new BufferedImage(chunkWidth, chunkHeight, image.getType());  
+  
+                // draws the image chunk  
+                Graphics2D gr = imgs[count++].createGraphics();  
+                gr.drawImage(image, 0, 0, chunkWidth, chunkHeight, chunkWidth * y, chunkHeight * x, chunkWidth * y + chunkWidth, chunkHeight * x + chunkHeight, null);  
+                gr.dispose();  
+            }  
+        }  
+        System.out.println("Splitting done");  
+  
+        //Zapis dielcov obrazku do priecinku  
+        for (int i = 0; i < imgs.length; i++) {  
+        	if(i<((imgs.length)-1)){
+        		ImageIO.write(imgs[i], "jpg", new File("src/main/webapp/resources/images/img" + (i+1) + ".jpg")); 
+        	}else{
+        		ImageIO.write(imgs[i], "jpg", new File("src/main/webapp/resources/images/img" + 0 + ".jpg"));
+        	}
+        }  
+        System.out.println("Mini images created");  
+}
+	}

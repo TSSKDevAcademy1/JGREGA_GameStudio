@@ -1,0 +1,34 @@
+package gameStudio;
+
+import java.awt.Event;
+import java.util.logging.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.jws.WebService;
+import javax.persistence.EntityManager;
+
+@Stateless
+@WebService(name="Registration") // touto anotaciou spravim z toho webservice
+public class RegistrationBean{
+
+    @Inject
+    private Logger log;
+
+    @Inject
+    private EntityManager em;
+
+    @Inject
+    private Event<Regdata> memberEventSrc;
+    
+    private Event event;
+
+    /* (non-Javadoc)
+	 * @see org.jboss.tools.examples.service.MemberRegistration#register(org.jboss.tools.examples.model.Member)
+	 */
+    public void register(Regdata regdata) throws Exception {
+        log.info("Registering " + regdata.getLogin());
+        em.persist(regdata);
+        memberEventSrc.fire(regdata);
+    }
+}

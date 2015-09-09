@@ -1,0 +1,26 @@
+package Register;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.jws.WebService;
+
+@Stateless
+@WebService(name="Register")
+public class RegisterWebService {
+	
+	@Inject
+	private RegisterSerial registerSerial;
+
+	public Person getPerson(int index) {
+		return registerSerial.getPerson(index);
+	}
+
+	public void addPerson(Person person) {
+		registerSerial.addPerson(person);
+	}
+
+	public void removePerson(Person person) {
+		registerSerial.removePerson(person);
+	}	
+	
+}

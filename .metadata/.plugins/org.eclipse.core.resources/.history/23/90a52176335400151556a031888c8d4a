@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!--  <meta charset="UTF-8"> -->
+ <!-- <link rel="icon" href="resources/gfx/favicon.png"/> -->
+<!-- <link rel="stylesheet" href="resources/css/style.css"> -->
+<!-- <title>Game Studio</title> -->
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:p="http://primefaces.org/ui" 		
+      xmlns:rich="http://richfaces.org/rich"    	
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<h:head>
+		
+		<link rel="icon" href="resources/gfx/favicon.png"/>
+		<link rel="stylesheet" href="resources/css/style.css"/>
+		<h:outputStylesheet library="css" name="style.css"  />
+		<title>Game Studio</title>
+		<!-- <title>Game Studio</title>
+		<style> 
+			.invalid {color: red;}
+		</style> -->
+	</h:head>
+
+	<body>
+	
+	<div class="colHeader span_12_of_12">
+	<h1>World of the Games</h1>
+	</div>
+	
+	<!-- 	<h:div class="colHeader span_12_of_12" style="background-color: black"; margin-top: 0px; margin-bottom: 0px;>
+		<h1>World of the Games</h1>
+	</h:div>
+	<h:link outcome="greeting" ></h:link>
+	
+	   			<div class="caption" style="color: black;" >#{image}</div>
+	
+	-->	
+	
+<!-- <h:link outcome="greeting" value="LINK"/> -->
+	<p:contentFlow value="#{imagesView.images}" var="image">
+  		
+   			<p:graphicImage name="images/#{image}" styleClass="content" outcome="greeting"/> <!-- "http://localhost:8080/jboss-javaee6-webapp/puzzle"  style="background-color: black"--> 
+ 			<div style="display: block; left: 0px; top: 0px; height: 374.161px; width: 249.441px; font-size: 100%; 
+ 			z-index: 32768; visibility: visible;" class="item  active"><h:link outcome="greeting" value="PLAY" class="myButton"/></div>
+   			<div class="caption" style="color: black;" ><h:link outcome="localhost:8080/jboss-javaee6-webapp/puzzle" value="PLAY" class="myButton" /></div>
+   		
+			</p:contentFlow>
+  <!-- </h:link> --> 
+	</body>
+</html>
+  
+<!--<div style="display: block; left: 540.78px; top: 0px; height: 374.161px; width: 249.441px; font-size: 100%; z-index: 32768; visibility: visible;" class="item  active"><canvas height="378" width="252" origproportion="1" id="j_idt10" src="/jboss-javaee6-webapp/javax.faces.resource/images/nature2.jpg.jsf;jsessionid=-wk6qP03Goo7xEpeoy1dID_pjCpBqEBXkiiBqksx.john" alt="" class="content portray"></canvas>  
+ 		
+   			<div class="caption" style="color: black;">nature2.jpg</div></div>  -->

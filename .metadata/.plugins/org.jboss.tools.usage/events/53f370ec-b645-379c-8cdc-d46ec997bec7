@@ -1,0 +1,10 @@
+#Fri Sep 04 08:17:59 CEST 2015
+l=Project example name
+ct=examples
+d=1441347479751
+c=0
+cmp=examples
+a=create
+cl=org.wildfly.archetype\:wildfly-javaee7-webapp-archetype\:8.2.0.Final
+v=3.0.0
+s=0

@@ -1,0 +1,24 @@
+package Register;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+@Named
+public class RegisterWebService {
+	
+	@Inject
+	private RegisterSerial registerSerial;
+
+	public Person getPerson(int index) {
+		return registerSerial.getPerson(index);
+	}
+
+	public void addPerson(Person person) {
+		registerSerial.addPerson(person);
+	}
+
+	public void removePerson(Person person) {
+		registerSerial.removePerson(person);
+	}	
+	
+}

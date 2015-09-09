@@ -1,0 +1,101 @@
+package puzzle_Stones;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/stone") //puzzle
+public class Stones extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		final String ROW_COUNT = "row";
+		final String COLUMN_COUNT = "column";
+		String newGame = "";
+		int row;
+		int column;		
+
+		PrintWriter out = response.getWriter();
+
+		HttpSession session = request.getSession();
+		Console console = (Console) session.getAttribute("console");
+
+		try {
+			if ("true".equals(request.getParameter("new"))) {
+				newGame = "true";
+				request.setAttribute("new", "false");
+			} else {
+
+			}
+		} catch (Exception e) {
+
+		}
+
+		try {
+			if (console == null || "true".equals(newGame)) {
+				console = new Console(2, 2);
+				session.setAttribute("console", console);
+				newGame = "false";
+			} else {
+				row = Integer.parseInt(request.getParameter(ROW_COUNT));
+				column = Integer.parseInt(request.getParameter(COLUMN_COUNT));
+				console.whereGo(row, column);
+			}
+		} catch (Exception e) {
+
+		}
+
+		response.setContentType("text/html");
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<link rel=\"stylesheet\" href=\"resources/css/style.css\">");
+		out.println("<title>Hello world</title>");
+		out.println("</head>");
+		out.println("<body>");
+
+		out.println("<div class=\"section group\">");//
+		out.println("<div class=\"col span_3_of_12\"></div>");//
+		out.println("<div class=\"col span_6_of_12\" style=\"border-radius:0px; border:5px solid #ffaa22;\">"); //"<div id=\"field\">"
+	
+		for (int rows = 0; rows < console.getRows(); rows++) {
+			for (int columns = 0; columns < console.getColumns(); columns++) {
+				if (console.getValue(rows, columns) != 0 && !console.Solved()) {					
+					out.print("<a href=\"?row=" + rows + "&column=" + columns + "\" class=\"Stone\">"+console.getValue(rows, columns)+"</a>"); 	//<img src=\"resources/gfx/stone"+ console.getValue(rows, columns) + ".png\">
+				} else if((console.getValue(rows, columns) == 0 && !console.Solved())) {
+					out.print("<a class=\"Empty\">0</a>");
+//					out.print("<img src=\"resources/gfx/stone" + console.getValue(rows, columns) + ".png\">");
+				} else {
+					String value = console.getValue(rows, columns) == 0 ? "Empty":"Stone";
+					out.print("<a class=\""+ value +"\">"+console.getValue(rows, columns)+"</a>");
+				}
+			}
+			out.print("</br>");
+		}
+//		out.print("</br>");
+		out.print("</div>");
+		out.println("<div class=\"col span_3_of_12\"></div>");
+		out.println("</div>");
+		out.print("<div id=\"button\">"); 
+		out.printf("<a href=\"?new=true\" class=\"myButton\">New Game</a>"); //?new=true
+		out.print("</div>");
+		if (console.Solved()) {
+			out.print("</br><h1>You are WINNERRR</h1></a>");
+		}
+		out.println("</body>");
+		out.println("</html>");
+
+	}
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+}
+
+

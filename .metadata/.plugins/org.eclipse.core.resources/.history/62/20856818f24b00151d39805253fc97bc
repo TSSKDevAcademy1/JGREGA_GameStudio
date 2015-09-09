@@ -1,0 +1,18 @@
+package Register;
+
+import javax.ejb.Local;
+import javax.inject.Inject;
+
+@Local
+public interface RegisterSerial {
+
+//	@Inject
+//	private ListRegister listRegister;
+
+	Person getPerson(int index);
+
+	Person addPerson(Person person);
+
+	void removePerson(Person person);
+
+}

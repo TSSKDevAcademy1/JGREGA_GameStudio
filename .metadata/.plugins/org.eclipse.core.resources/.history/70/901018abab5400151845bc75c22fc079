@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!--  <meta charset="UTF-8"> -->
+ <!-- <link rel="icon" href="resources/gfx/favicon.png"/> -->
+<!-- <link rel="stylesheet" href="resources/css/style.css"> -->
+<!-- <title>Game Studio</title> -->
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:p="http://primefaces.org/ui" 		
+      xmlns:rich="http://richfaces.org/rich"    	
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<h:head>
+		
+		<link rel="icon" href="resources/gfx/favicon.png"/>
+		<link rel="stylesheet" href="resources/css/style.css"/>
+		<h:outputStylesheet library="css" name="style.css"  />
+		<title>Game Studio</title>
+		<!-- <title>Game Studio</title>
+		<style> 
+			.invalid {color: red;}
+		</style> -->
+	</h:head>
+
+	<body>
+	
+	<div class="colHeader span_12_of_12">
+	<h1>World of the Games</h1>
+	</div>	
+	
+	
+<!-- <h:link outcome="greeting" value="LINK"/> -->
+	<p:contentFlow value="#{imagesView.game}" var="game">
+  		
+   			<p:graphicImage name="images/#{game}.jpg" styleClass="content" outcome="greeting"/> <!-- "http://localhost:8080/jboss-javaee6-webapp/puzzle"  style="background-color: black"--> 
+ 			<div style="display: block; left: 0px; top: 0px; height: 450.161px; width: 350.441px; font-size: 100%; 
+ 			z-index: 32768; visibility: visible;" class="item  active"><h:outputLink value="http://localhost:8080/jboss-javaee6-webapp/#{game}" styleClass="get">PLAY</h:outputLink></div>
+   			<div class="caption" style="color: black; height: 40px;"  ><h:outputLink value="http://localhost:8080/jboss-javaee6-webapp/#{game}" styleClass="myButton">PLAY</h:outputLink></div>
+   		
+			</p:contentFlow>
+  <!-- </h:link> --> 
+	</body>
+</html>
+  
+

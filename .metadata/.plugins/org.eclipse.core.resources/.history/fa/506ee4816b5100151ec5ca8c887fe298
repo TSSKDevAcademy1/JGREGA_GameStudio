@@ -1,0 +1,51 @@
+package sweeper;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/sweeper")
+public class mineSweeper extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Field field = (Field)request.getSession().
+		Field field = new Field(5, 5, 5);
+		PrintWriter out = response.getWriter();
+
+		response.setContentType("text/html");
+
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<title>Hello world</title>");
+		out.println("</head>");
+		out.println("<body>");
+
+		// out.println("hello");
+		for (int rows = 0; rows < field.getRowCount(); rows++) {
+			for (int columns = 0; columns < field.getColumnCount(); columns++) {
+
+				if(field.getTiles(rows, columns).getState() == Tile.State.CLOSED){
+					out.println("<a href=\"?row="+rows+"&column="+columns+"\"><img src=\"resources/gfx/closed.png\"></a>");
+				}else if(field.getTiles(rows, columns).getState() == Tile.State.OPEN){
+					out.println("<a href=\"?row="+rows+"&column="+columns+"\"><img src=\"resources/gfx/open0.png\"></a>");
+				}
+			}
+			out.println("</br>");
+		}
+		out.println("</body>");
+		out.println("</html>");
+
+	}
+
+	// vola sa ked je zavolana zo strany klienta na server
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+
+}

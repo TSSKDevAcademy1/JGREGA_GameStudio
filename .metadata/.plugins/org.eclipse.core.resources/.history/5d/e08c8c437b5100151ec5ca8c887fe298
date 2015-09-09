@@ -1,0 +1,78 @@
+package sweeper;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.validator.internal.util.privilegedactions.GetAnnotationParameter;
+
+@WebServlet("/sweeper")
+public class mineSweeper extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		PrintWriter out = response.getWriter();
+
+		final String ROW_COUNT = "row";
+		final String COLUMN_COUNT = "column";
+		int row;
+		int column;
+
+		HttpSession session = request.getSession();
+		Field field = (Field) session.getAttribute("field");
+
+		if (field == null) {
+			field = new Field(5, 5, 2);
+			session.setAttribute("field", field);
+		} else {
+			row = Integer.parseInt(request.getParameter(ROW_COUNT));
+			column = Integer.parseInt(request.getParameter(COLUMN_COUNT));
+			field.openTile(row, column);
+			System.out.println(row);
+			System.out.println(column);
+		}
+
+		response.setContentType("text/html");
+
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<title>Hello world</title>");
+		out.println("</head>");
+		out.println("<body>");
+
+		for (int rows = 0; rows < field.getRowCount(); rows++) {
+			for (int columns = 0; columns < field.getColumnCount(); columns++) {
+				
+				if (field.getTiles(rows, columns).getState() == Tile.State.CLOSED) {
+//						if(field.getTiles(rows, columns).)
+					out.println("<a href=\"?row=" + rows + "&column=" + columns
+							+ "\"><img src=\"resources/gfx/closed.png\"></a>");
+				} else if (field.getTiles(rows, columns).getState() == Tile.State.OPEN) {
+					Tile tile = field.getTiles(rows, columns);
+					String value = tile.toString();
+//					if(field.getTiles(rows, columns).getState() instance of Clue)
+					out.println("<a href=\"?row=" + rows + "&column=" + columns
+							+ "\"><img src=\"resources/gfx/open "+value+".png\"></a>");
+				}
+			}
+			out.println("</br>");
+		}
+		out.println("</body>");
+		out.println("</html>");
+		
+
+	}
+
+	// vola sa ked je zavolana zo strany klienta na server
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+
+}

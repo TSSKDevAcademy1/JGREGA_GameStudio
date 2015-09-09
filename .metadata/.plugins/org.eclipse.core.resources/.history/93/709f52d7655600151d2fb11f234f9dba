@@ -1,0 +1,53 @@
+package gameStudio;
+
+import javax.inject.Named;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Named
+@Entity
+public class Score {
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	private String name;
+	
+	private String game;
+	
+	private long time;
+
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(long StartTime,long EndTime) {
+		this.time = (EndTime-StartTime)/1000;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getGame() {
+		return game;
+	}
+
+	public void setGame(String game) {
+		this.game = game;
+	}
+}

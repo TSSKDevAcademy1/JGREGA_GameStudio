@@ -1,0 +1,7 @@
+1441643260083	Rename type 'UserRegistration'
+1441656854818	Rename field 'name'
+1441661185956	Rename resource 'indexOrig.xhtml'
+1441661288406	Rename resource 'skuska.html'
+1441663326438	Delete element
+1441663417753	Extract interface 'Register'
+1441720100957	Rename resource 'sweeper.xhtml'

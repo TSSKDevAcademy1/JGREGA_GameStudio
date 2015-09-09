@@ -1,0 +1,31 @@
+package servlet;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+ 
+@ManagedBean
+public class ImagesView {
+     
+    private List<String> images;
+    private List<String> games;
+     
+    @PostConstruct
+    public void init() {
+        images = new ArrayList<String>();
+        games = new ArrayList<String>();
+        for (int i = 1; i <= 3; i++) {
+            images.add("nature" + i + ""); //".jpg"
+            games.add("game" + i +"" );        }
+    }
+ 
+    public List<String> getImages() {
+        return images;
+    }
+    
+    public List<String> getGame() {
+        return games;
+    }
+}
+

@@ -1,0 +1,25 @@
+package gameStudio;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+@Named
+@SessionScoped
+public class LoggedUser {
+
+	@Id
+	@GeneratedValue
+	private long id;	
+	
+	@NotNull
+    @Size(min = 1, max = 25)
+    @Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
+	private String login;
+	
+	
+}

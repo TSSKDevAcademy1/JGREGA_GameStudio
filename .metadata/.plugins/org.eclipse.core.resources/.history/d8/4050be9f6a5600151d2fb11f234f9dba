@@ -1,0 +1,23 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Model;
+import javax.inject.Inject;
+
+
+@ManagedBean
+@SessionScoped
+public class ScoreService implements Serializable {
+	
+	@Inject
+	private Score score;
+	
+	private ArrayList<Score> scores = new ArrayList<Score>();
+	
+	
+
+}

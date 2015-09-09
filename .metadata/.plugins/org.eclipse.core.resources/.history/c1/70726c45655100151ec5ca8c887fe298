@@ -1,0 +1,43 @@
+package sweeper;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/sweeper")
+public class Servlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	//	Field field = (Field)request.getSession().
+		Field field = new Field(5, 5, 5);
+		PrintWriter out = response.getWriter();
+		
+		response.setContentType("text/html");
+
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<title>Hello world</title>");
+		out.println("</head>");
+		out.println("<body>");
+		
+		out.println("<img src=\"resources/gfx/images/closed.png\">");
+		
+		out.println("</body>");
+		out.println("</html>");
+		
+		
+	
+	}
+	
+	// vola sa ked je zavolana zo strany klienta na server
+		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			doGet(req, resp);
+		}
+	
+	
+}

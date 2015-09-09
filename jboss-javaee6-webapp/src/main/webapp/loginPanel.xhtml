@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!--  <meta charset="UTF-8"> -->
+ <!-- <link rel="icon" href="resources/gfx/favicon.png"/> -->
+<!-- <link rel="stylesheet" href="resources/css/style.css"> -->
+<!-- <title>Game Studio</title> -->
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets" 		
+      xmlns:rich="http://richfaces.org/rich"    	
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      template="/WEB-INF/templates/gameStudioTemplate.xhtml">
+	
+<ui:define name="loginPanel">
+<h:form>
+ 	
+		<h:panelGrid columns="1" style="color: blue; text-align:left">
+			Login:
+			<p:inputText id="name" value="#{user.name}" >
+				<f:ajax/>
+			</p:inputText>
+			<h:message for="name" errorClass="invalid" />			
+			
+			Password:
+			<p:inputText id="passwd" value="#{user.passwd}"/>
+			<h:message for="passwd" errorClass="invalid" />			
+			
+			<!-- <h:commandButton action="main" value="Send!"/> -->
+			
+			<p:growl id="growl" life="2000" />     
+    		<p:commandButton action="main" value="Sing In" id="ajax" update="growl"  styleClass="ui-priority-primary" style="text-align:left"/> <!-- actionListener="#{buttonView.buttonAction}" -->
+			<p:commandButton action="registrate" value="Sing Up" id="singUp" update="growl"  styleClass="ui-priority-primary" style="text-align:left"/> <!-- actionListener="#{buttonView.buttonAction}" -->
+			
+			</h:panelGrid>
+</h:form>
+</ui:define>
+</ui:composition>
+

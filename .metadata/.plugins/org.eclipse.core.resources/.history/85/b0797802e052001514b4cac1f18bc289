@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   
+-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+<h:head>
+	<title>login screen</title>
+	<style>
+.invalid {
+	color: red
+}
+</style>
+</h:head>
+
+<body>
+
+	<h:form>
+		<h:panelGrid columns="3">
+		
+		
+		
+		Name:
+		<h:inputText id="name" value="#{user.name}">
+				<f:validateLength minimum="5" maximum="10"></f:validateLength>
+			</h:inputText>
+			<h:message for="name" errorClass="invalid" />
+			<br />
+			
+		Birthdate:
+		<rich:calendar id="date" value="#{user.birthDay}"
+			datePattern="d.M.yyyy" />
+		<h:message for="date" errorClass="invalid" />
+		<br />
+
+		Password:
+		<h:inputText id="passwd" value="#{user.passwd}">
+				<f:validateLength minimum="5" maximum="10"></f:validateLength>
+			</h:inputText>
+			<h:message for="passwd" errorClass="invalid" />
+			<br />
+		
+		Age:
+		<h:inputText id="age" value="#{user.age}">
+				<f:validateLongRange minimum="1" maximum="150"></f:validateLongRange>
+			</h:inputText>
+			<h:message for="age" errorClass="invalid" />
+			<br />
+			<!-- aby sa prepojil na main.jsf co zabezpeci pozdrav -->
+			<h:commandButton action="main.jsf" value="Send!" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+</body>
+</html>

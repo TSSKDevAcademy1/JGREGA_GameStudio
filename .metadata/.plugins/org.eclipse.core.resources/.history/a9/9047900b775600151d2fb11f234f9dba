@@ -1,0 +1,32 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import sweeper.Field;
+
+
+
+@ApplicationScoped
+public class ScoreService {
+	
+	@Inject
+	@Named
+	private Score score;
+		
+	@Inject
+	private Field field;
+	
+	private ArrayList<Score> scores = new ArrayList<Score>();
+	
+	public void skuska(){
+		System.out.println("tu este dojdem");
+
+	}
+
+}

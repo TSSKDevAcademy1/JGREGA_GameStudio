@@ -1,0 +1,55 @@
+package puzzle_Stones;
+
+import javax.imageio.ImageIO;
+import javax.inject.Named;
+
+import java.awt.image.BufferedImage;  
+import java.io.*;  
+import java.awt.*;  
+  
+@Named
+public class ImageSplit {  
+	int rows;
+	int cols;
+	String imageName;
+    
+	public ImageSplit(int rows, int cols, String imageName){
+		this.rows = rows;
+		this.cols = cols;
+		this.imageName = imageName;
+	}
+	
+//  public void Split() throws IOException{
+	public static void Chunk() throws IOException {
+        File file = new File("src/main/webapp/resources/images/gameStone.jpg"); // z kadial obrazok 
+        FileInputStream fis = new FileInputStream(file);  
+        BufferedImage image = ImageIO.read(fis); //nacitanie image adresara
+  
+//        int rows = 2; //Pocet riadkov a stlpcov 
+//        int cols = 2;  
+        int chunks = rows * cols;  
+        BufferedImage imgs[] = new BufferedImage[chunks]; //Image array to hold image chunks 
+        int chunkWidth = image.getWidth() / cols; // determines the chunk width and height  
+        int chunkHeight = image.getHeight() / rows;  
+        int count = 0;  
+        
+        for (int x = 0; x < rows; x++) {  
+            for (int y = 0; y < cols; y++) {  
+                //Initialize the image array with image chunks  
+                imgs[count] = new BufferedImage(chunkWidth, chunkHeight, image.getType());  
+  
+                // draws the image chunk  
+                Graphics2D gr = imgs[count++].createGraphics();  
+                gr.drawImage(image, 0, 0, chunkWidth, chunkHeight, chunkWidth * y, chunkHeight * x, chunkWidth * y + chunkWidth, chunkHeight * x + chunkHeight, null);  
+                gr.dispose();  
+            }  
+        }  
+        System.out.println("Splitting done");  
+  
+        //Zapis dielcov obrazku do priecinku  
+        for (int i = 0; i < imgs.length; i++) {  
+            ImageIO.write(imgs[i], "jpg", new File("src/main/webapp/resources/images/img" + i + ".jpg"));  
+        }  
+        System.out.println("Mini images created");  
+}
+	}

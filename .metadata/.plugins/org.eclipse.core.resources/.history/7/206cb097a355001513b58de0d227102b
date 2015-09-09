@@ -1,0 +1,86 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+public class Regdata implements Serializable{
+	/**
+	 * 
+	 */
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	private static final long serialVersionUID = 1L;
+
+	@Size(min = 5, max = 10)
+	private String login;
+	
+
+	private String passwd;
+	
+	@NotNull
+    @Size(min = 1, max = 150)
+	private int age;
+	
+	private String country;
+	
+	private Date birthDay;
+
+	/**
+	 * @return the birthDay
+	 */
+	public Date getBirthDay() {
+		return birthDay;
+	}
+
+	/**
+	 * @param birthDay the birthDay to set
+	 */
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+	
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String name) {
+		this.login = name;
+	}
+
+	public String getPasswd() {
+		return passwd;
+	}
+
+	public void setPasswd(String password) {
+		this.passwd = password;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	
+}

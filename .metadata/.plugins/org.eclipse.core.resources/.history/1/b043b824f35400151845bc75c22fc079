@@ -1,0 +1,187 @@
+package puzzle_Stones;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Serializable;
+
+public class Console  {
+
+	private int rows;
+	private int columns;
+	public int[][] matrix2;
+	private int nullRow;
+	private int nullColumns;
+	
+	/**
+	 * Menu options.
+	 */	
+
+	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	public int getColumns() {
+		return columns;
+	}
+
+	public void setColumns(int columns) {
+		this.columns = columns;
+	}
+
+	private String readLine() {
+		try {
+			return input.readLine();
+		} catch (IOException e) {
+			return null;
+		}
+	}
+	
+	public Console(int rows, int columns){
+		this.rows = rows;
+		this.columns = columns;
+		startGame(rows,columns);
+	}
+	
+	
+	// Nacitanie velkosti hracieho pola a pociatocneho pola
+	public void startGame(int rows,int columns) {			
+			playGround field = new playGround(rows, columns);
+			field.createField();
+			matrix2 = field.getMatrix();			
+//		game();
+	}
+
+//	// Vyber z moznosti pohybov a exit
+//	private void game() {			
+//			findZero();
+//		}
+
+	public int[][] getMatrix2() {
+		return matrix2;
+	}	
+	
+	public int getValue(int row, int column){
+		return matrix2[row][column];
+	}
+
+	public void setMatrix2(String value,int row, int column) {		
+		matrix2[row][column] = Integer.parseInt(value);
+	}
+	
+	public void whereGo(int row, int column){
+		findZero();
+		if((nullRow == row) && (nullColumns - 1 == column)){
+			right();
+		}else if((nullRow == row) && (nullColumns + 1 == column)){
+			left();
+		}else if((nullRow - 1 == row) && (nullColumns == column)){
+			down();
+		}else if((nullRow + 1 == row) && (nullColumns == column)){
+			up();
+		}
+	}
+	
+	// Posun do lava	
+	private void left() {
+		if (nullColumns < columns - 1 && nullColumns != columns) {
+			move(0,1);
+//			printer();
+		}else{
+			
+		}
+	}
+
+	// Posun do prava
+	private void right() {	
+		if (nullColumns <= columns - 1 && nullColumns != 0) { 
+			move(0,-1);
+//			printer();
+		}else{
+			
+		}		
+	}
+
+	// Posun hore
+	private void up() {
+		if (nullRow < rows - 1 && nullRow != rows) {
+			move(1,0);
+//			printer();
+		}else{
+			
+		}		
+	}
+
+	// Posun dole
+	private void down() {
+		if (nullRow < rows && nullRow != 0) {
+			move(-1,0);
+//			printer();
+		}else{
+			
+		}
+	}	
+	
+	// Posun vybraneho cisla 
+	private void move(int rowEdit,int columnEdit){
+		matrix2[nullRow][nullColumns] = matrix2[nullRow + rowEdit][nullColumns + columnEdit];
+		matrix2[nullRow + rowEdit][nullColumns + columnEdit] = 0;
+	}
+	
+	// Najdenie nuly v hracom poli
+	private void findZero(){
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				if (matrix2[i][j] == 0) {
+					nullRow = i;
+					nullColumns = j;
+				}
+			}
+		}
+	}
+
+	// Vykreslenie hracieho pola
+//	public void printer() {
+//		String gameField = "";		
+//		for (int i = 0; i < rows; i++) {
+//			for (int j = 0; j < columns; j++) {
+//				if (matrix2[i][j] < 10) {
+//					gameField += matrix2[i][j] + "  ";
+//				} else {
+//					gameField += matrix2[i][j] + " ";
+//				}
+//			}
+//			gameField += "\n";
+//		}
+//		System.out.println(gameField);
+//	}
+
+	// Kontrola usporiadania kamenov.. 
+	public boolean Solved() {
+		int count = 0;
+		int count2 = 0;
+
+		if (matrix2[0][0] == 1) {
+			for (int i = 0; i < rows; i++) {
+				for (int j = 0; j < columns; j++) {
+					count++;
+					if (matrix2[i][j] == count) {
+						count2++;
+					}
+				}
+			}
+		}
+		if (count2 == (rows * columns) - 1) {
+			 System.out.println("You are Winner!!!");
+			 return true;
+		}
+		return false;
+	}
+	
+}

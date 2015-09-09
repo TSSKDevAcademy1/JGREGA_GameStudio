@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!--  <meta charset="UTF-8"> -->
+<!-- <link rel="icon" href="resources/gfx/favicon.png"/> -->
+<!-- <link rel="stylesheet" href="resources/css/style.css"> -->
+<!-- <title>Game Studio</title> -->
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+	<link rel="icon" href="resources/gfx/favicon.png" />
+	<link rel="stylesheet" href="resources/css/style.css" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Game Studio</title>
+	<!-- <title>Game Studio</title>
+		<style> 
+			.invalid {color: red;}
+		</style> -->
+</h:head>
+
+<body background="resources/images/gamingWallpaper2.jpg"
+	style="background-size: auto">
+
+	<div class="colHeader span_12_of_12">
+		<h1>World of the Games</h1>
+		<!-- class="div_text_shadow " -->
+	</div>
+
+
+
+	<div class="section group">
+		<!--  style="width: 900px; height: 500px; margin: auto;" -->
+		<div class="col span_2_of_12">
+			<h:form>
+
+				<h:panelGrid columns="1" style="color: blue; text-align:left">
+			Login:
+			<p:inputText id="name" value="#{regData.login}">
+						<f:ajax />
+					</p:inputText>
+					<h:message for="name" errorClass="invalid" />			
+			
+			Password:
+			<p:inputText id="passwd" value="#{regData.passwd}" />
+					<h:message for="passwd" errorClass="invalid" />
+
+					<h:outputText value="#{messages.welcomeMessage}"
+						style="font-weight:bold" />
+
+					<!-- <h:commandButton action="main" value="Send!"/> -->
+
+					<p:growl id="growl" life="2000" />
+					<p:commandButton action="#{registrationControler.logIn}"
+						value="Sing In" id="ajax" update="growl"
+						styleClass="ui-priority-primary" style="text-align:left" />
+
+				</h:panelGrid>
+			</h:form>
+
+<h:form>
+			<h:panelGrid columns="1" style="color: blue; text-align:left">
+
+				<p:commandButton action="registrate" value="Sing Up" id="SingUp"
+					styleClass="ui-priority-primary" style="text-align:left" />
+
+			<h:outputText value="#{registrationControler.LogDisplay()}"
+					style="font-weight:bold" />
+
+
+			</h:panelGrid>
+</h:form>
+		</div>
+
+		<div class="col span_8_of_12">
+			<!-- ; margin: auto; -->
+
+			<ui:insert name="studio">
+
+			</ui:insert>
+
+			<ui:insert name="regist">
+
+			</ui:insert>
+
+			<ui:insert name="try">
+
+			</ui:insert>
+
+
+
+		</div>
+
+		<div class="col span_2_of_12">
+			<h1>NA PRAVA</h1>
+		</div>
+	</div>
+
+	<!--  <div class="col span_12_of_12">
+		<ui:insert name="studio">
+
+		</ui:insert>
+	</div>
+	<ui:include src="/main/webapp/commonHeader.xhtml" />
+	-->
+</body>
+</html>
+
+

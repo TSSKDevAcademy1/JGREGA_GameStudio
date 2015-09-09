@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets" 		
+      xmlns:rich="http://richfaces.org/rich"    	
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      template="/WEB-INF/templates/gameStudioTemplate.xhtml">
+	
+<ui:define name="try">
+<div>
+
+ 	<f:view>    	
+    		<h1 style="color: white">Hello #{regdata.name} from #{regdata.country}, 
+    		#{regdata.age} years old (born on #{regdata.birthDay})) you are succesfull registrated :)!</h1>
+	</f:view>
+	
+	<!--  <p:commandButton action="http://localhost:8080/jboss-javaee6-webapp/gameStudio.jsf" 
+	value="BackToMenu" id="back" styleClass="ui-priority-primary" style="text-align:left"/> --> <!-- actionListener="#{buttonView.buttonAction}" -->
+	
+	<h:outputLink value="http://localhost:8080/jboss-javaee6-webapp/gameStudio.jsf" styleClass="myButton" style="text-align:left">BACK
+	</h:outputLink>    
+	
+   </div>
+</ui:define>
+</ui:composition>

@@ -1,0 +1,9 @@
+package Register;
+
+import javax.inject.Named;
+
+@Named
+public class RegisterWebService {
+	
+	
+}

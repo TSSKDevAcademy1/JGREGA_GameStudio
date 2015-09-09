@@ -1,0 +1,80 @@
+package gameStudio;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.inject.Model;
+import javax.enterprise.inject.Produces;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+
+@Model
+public class RegistrationControler {
+
+    @Inject
+    private FacesContext facesContext;
+    
+	@Inject
+	private Register register;
+	
+	@Inject
+	private LoginValidate validate;
+  
+    @Produces
+    @Named
+    private Regdata regData; //  Member newMember  
+    
+    @PostConstruct
+    public void initNewRegistration() {
+        regData = new Regdata();
+    }
+
+    public void register() throws Exception {
+        try {
+            register.register(regData);;
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registereration Done!", "Thanks for registration");
+            facesContext.addMessage(null, m);
+            initNewRegistration();
+        } catch (Exception e) {
+            String errorMessage = getRootErrorMessage(e);
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Something wrong with registration!");
+            facesContext.addMessage(null, m);
+        }
+    }
+    
+    // LOG IN
+    public void logIn(){
+    	System.out.println(regData.getLogin());
+    	String loginIs = regData.getLogin();
+    	String passIs = regData.getPasswd();
+    	if(validate.isRegistered(loginIs,passIs)){
+    		System.out.println("presiel");
+    		FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "SingIn Done!", "Thanks for SingIn");
+            facesContext.addMessage(null, m);
+      }else{    	
+    	  System.out.println("nepresiel");
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wrong Login or Password", "Something wrong with SingIn!");
+    	}
+    }
+
+    private String getRootErrorMessage(Exception e) {
+        // Default to general error message that registration failed.
+        String errorMessage = "Registration failed. See server log for more information";
+        if (e == null) {
+            // This shouldn't happen, but return the default messages
+            return errorMessage;
+        }
+
+        // Start with the exception and recurse to find the root cause
+        Throwable t = e;
+        while (t != null) {
+            // Get the message from the Throwable class instance
+            errorMessage = t.getLocalizedMessage();
+            t = t.getCause();
+        }
+        // This is the root cause message
+        return errorMessage;
+    }
+
+}

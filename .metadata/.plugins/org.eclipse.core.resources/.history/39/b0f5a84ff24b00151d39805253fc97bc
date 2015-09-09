@@ -1,0 +1,15 @@
+package Register;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+@Named
+public class RegisterWebService {
+	
+	@Inject
+	private RegisterSerial registerSerial;
+	
+	public Person addPersonReg () {
+		return registerSerial.addPerson(new Person("Janko Hrasko","12346"));
+	}
+}

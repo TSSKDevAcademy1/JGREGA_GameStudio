@@ -1,0 +1,50 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Model;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import sweeper.Field;
+
+
+
+@Model
+public class ScoreService {
+	
+	@Produces
+    @Named
+	private Score scoreNew;
+	
+	@Inject
+	@Named
+	private LoggedUser loggedUser;
+	
+	@PostConstruct
+    public void initNewRegistration() {
+        scoreNew = new Score();
+    }
+
+	private ArrayList<Score> scores = new ArrayList<Score>();
+	
+	public void skuska(long FinalTime,String GameName){
+		System.out.println("tu este dojdem");
+		String time = String.valueOf(FinalTime);
+//		System.out.println("Cas:"+time+"Hra"+GameName+" User:"+loggedUser.getLogin()+"");		
+//		scoreNew.setGame(GameName);
+//		scoreNew.setTime(FinalTime);
+//		try{
+//			scoreNew.setName(loggedUser.getLogin());
+//		}catch(Exception e){
+//			scoreNew.setName("none");
+//		}
+	
+	}
+
+}

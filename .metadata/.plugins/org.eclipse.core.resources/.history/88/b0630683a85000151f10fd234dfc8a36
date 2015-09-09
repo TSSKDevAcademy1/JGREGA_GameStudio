@@ -1,0 +1,118 @@
+package servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/hello")
+public class HelloWorld extends HttpServlet {
+	int helper = 0;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = "";
+		String password  = "";	
+		String age = "0";
+		int Iage = 0;
+		String nameVal = "";
+		String passVal = "";
+		String ageVal = "";
+		boolean validName = false, validPass, validAge = false;
+		
+		PrintWriter out = response.getWriter();	
+		
+		response.setContentType("text/html"); // davam vediet browseru co mu posielam 
+		
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<title>Hello world</title>");
+		out.println("</head>");
+		out.println("<body>");
+		
+		out.printf("<img src=\"resources/gfx/wildfly_400x130.jpg\"><br>"); // posielam mu tam parameter name		
+		
+		out.println("<form action=\"hello\" method=\"post\">"); // formular (post nezobrazi zadane udaje v URL) ACTION = (vypise tam namiesto zadanych udajov "HELLO")
+		
+		
+//		name = request.getParameter("meno");		
+//		nameVal = name;
+		out.printf("Name: <input type = \"text\" name=\"meno\" value=\""+nameVal+"\"> "); // okno pre pisanie	
+//		name = request.getParameter("meno");		
+//		nameVal = name;
+//		if(name.length() >= 5 && name.length() <=10 ){			
+//
+//			out.printf("<br>");//			nameVal = name;
+//			validName = true;
+//		}else{
+//			out.printf("Zle meno (Zadaj 5 az 10 znakov) <br>");
+//			validName = false;
+//		}
+		
+		password = request.getParameter("heslo");		
+		out.printf("Password: <input type = \"password\" name=\"heslo\" value=\""+passVal+"\"> "); // okno pre pisanie				
+//		if(haveNumber(password) > 0 && password.length() <=10 && password.length() >= 5){
+//			passVal = "*****";
+//			out.printf("<br>");
+//			validPass = true;
+//		}else{
+//			out.printf("Zle heslo (Zadaj 5 az 10 znakov a cislicu) <br>");		
+//			validPass = false;
+//		}
+				
+		age = request.getParameter("vek");	
+		ageVal = age + "";	
+		out.printf("Age: <input type = \"number\" name=\"vek\" value=\"" + ageVal + "\"> "); // okno// pre// pisanie												
+//		try{
+//			Iage = Integer.parseInt(age);												
+//		if (Iage <= 150 && Iage > 0) {
+////			ageVal = age + "";
+//			out.printf("<br>");
+//			validAge = true;
+//		} else {
+//			out.printf("Zly vek (Zadaj od 1 do 150 rokov) <br>");
+//			validAge = false;
+//		}
+//		}catch(NumberFormatException e){
+//			out.printf("Zly vek (Zadaj od 1 do 150 rokov) <br>");
+//			out.printf("<br>");			
+//			validAge = false;
+//		}
+//		
+
+			
+
+		
+		out.println("<input type = \"submit\" name=\"Send\" value=\" Send!\" >"); // tlacidlo submit
+				
+		out.println("</form>");
+		
+		if(validName && validPass && validAge){
+		out.printf("<h1>Hello %s from XXX, you are %s years old\n</h1>",name,age); // posielam mu tam parameter name
+		}else{
+			
+		}
+		
+		out.println("</body>");
+		out.println("</html>");		
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp); // vola sa ked je zavolana zo strany klienta na server
+	}
+	
+	private int haveNumber(String password) {
+		
+		for (char c : password.toCharArray()) {
+			if (Character.isDigit(c)) {
+				helper++;
+			}
+		}
+		return helper;
+	}
+}
+

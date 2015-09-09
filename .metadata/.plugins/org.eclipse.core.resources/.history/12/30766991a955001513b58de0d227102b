@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!--  <meta charset="UTF-8"> -->
+ <!-- <link rel="icon" href="resources/gfx/favicon.png"/> -->
+<!-- <link rel="stylesheet" href="resources/css/style.css"> -->
+<!-- <title>Game Studio</title> -->
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets" 		
+      xmlns:rich="http://richfaces.org/rich"    	
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      template="/WEB-INF/templates/gameStudioTemplate.xhtml">
+	
+<ui:define name="registrate">
+<div>
+			<h:form
+				style="background-image:resources/images/gamingWallpaper2.jpg">
+
+				<h:panelGrid columns="3" style="text-color: white">
+			Login:
+			<p:inputText id="login" value="#{regdata.login}">
+						<f:ajax />
+					</p:inputText>
+					<h:message for="login" errorClass="invalid" />
+			
+			Password:
+			<!--  <p:inputText id="passwd" value="#{user.passwd}"/>
+			<h:message for="passwd" errorClass="invalid" />		-->
+					<p:inputText id="passwd" value="#{regdata.passwd}" />
+					<h:message for="passwd" errorClass="invalid" />
+					<!--  
+			Birthdate:
+	        <rich:calendar id="date" value="#{regdata.birthDay}" datePattern="d.M.yyyy"/>
+			<h:message for="date" errorClass="invalid" />		
+-->
+			Age:
+			<h:inputText id="age" value="#{regdata.age}" />
+					<h:message for="age" errorClass="invalid" />		
+			
+			Country:
+			<h:selectOneMenu id="country" value="#{regdata.country}"
+						required="true" label="Country">
+						<f:selectItem itemValue="#{null}" itemLabel="-- Select country --"
+							noSelectionOption="true" />
+						<f:selectItems value="#{countryRepository.countryNames}" />
+					</h:selectOneMenu>
+					<h:message for="country" errorClass="invalid" />
+
+				</h:panelGrid columns="2">
+				
+				<h:panelGrid>
+					<h:commandButton action="try" value="BackToMenu"/>
+				</h:panelGrid>
+			</h:form>
+		</div>
+</ui:define>
+</ui:composition>
+

@@ -1,0 +1,19 @@
+1440504148312	Copy file
+1440506076022	Rename type 'Message'
+1440588954727	Rename type 'MemberRegistration'
+1440588967766	Extract interface 'MemberRegistration'
+1440589092635	Delete element
+1440589099319	Delete element
+1440589183647	Extract interface 'MemberRegistration'
+1440592035350	Delete element
+1440592060212	Delete element
+1440592150888	Extract interface 'RegisterWebService'
+1440592870073	Rename type 'RegisterWebService'
+1440592882500	Rename type 'Register'
+1440687005011	Rename type 'RegisterWebService'
+1440745226171	Encapsulate field 'name'
+1440749185739	Rename type 'ShopRESTService'
+1440750500663	Rename type 'ShopRESTServiceCategory'
+1440761379435	Encapsulate field 'menoZakaznika'
+1440764138720	Infer generic type arguments
+1440766063197	Encapsulate field 'date'

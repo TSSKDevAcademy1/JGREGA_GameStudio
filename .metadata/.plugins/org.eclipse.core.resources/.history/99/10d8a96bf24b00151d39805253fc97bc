@@ -1,0 +1,78 @@
+package Register;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.jws.WebService;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+
+// Trieda pre pracu s List-om
+@Stateless
+@WebService(name="Register")
+public class ListRegister implements Serializable, Iterable<Person>, RegisterSerial{
+
+	private List<Person> persons = new ArrayList<Person>();
+
+	public Iterator<Person> iterator() {
+		return persons.iterator();
+	}
+
+	public int getCount() {
+		return persons.size();
+	}
+	
+	public int getSize(){
+		return persons.size();
+	}
+
+	/* (non-Javadoc)
+	 * @see Register.RegisterWebService#getPerson(int)
+	 */
+	@Override
+	public Person getPerson(int index) {
+		Collections.sort(persons);
+		return persons.get(index);
+	}
+
+	public void setPerson(Person person, int a) {
+		persons.set(a, person);
+	}
+
+	/* (non-Javadoc)
+	 * @see Register.RegisterWebService#addPerson(Register.Person)
+	 */
+	@Override
+	public void addPerson(Person person) {
+		persons.add(person);
+	}
+
+	public Person findPersonByName(String name) throws Exception {
+		return persons.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
+	}
+
+	public Person findPersonByPhoneNumber(String phoneNumber) throws Exception {
+		for (int i = 0; i < persons.size(); i++) {
+			if (phoneNumber.equals(persons.get(i).getPhoneNumber())) {
+				return persons.get(i);
+			}
+		}
+		throw new Exception("Person with this phone number NOT FOUND!!");
+	}
+
+	/* (non-Javadoc)
+	 * @see Register.RegisterWebService#removePerson(Register.Person)
+	 */
+	@Override
+	public void removePerson(Person person) {
+		for (int i = 0; i < persons.size(); i++) {
+			if (person.equals(persons.get(i))) {
+				persons.remove(i);
+			}
+		}
+	}
+}
